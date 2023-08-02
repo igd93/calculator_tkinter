@@ -9,21 +9,44 @@ num1.grid(column = 0, row = 0)
 num1Entry = tk.Entry()
 num1Entry.grid(column = 1, row = 0)
 
-num2 = tk.Label(text = "ENter 2nd Number: ")
+num2 = tk.Label(text = "Enter the 2nd Number: ")
 num2.grid(column = 0, row = 1)
 num2Entry = tk.Entry()
 num2Entry.grid(column = 1, row = 1)
 
-def addNumbers():
+opLabel = tk.Label(text = "Select the operation: ")
+opLabel.grid(column = 0, row = 2)
+
+myOption = tk.StringVar(window)
+myOption.set("Select")
+opMenu = tk.OptionMenu(window, myOption, "Add", "Subtract", "Multiply", "Divide")
+opMenu.grid(column = 1, row = 2)
+
+#event method
+
+def mathOperations():
     a = int(num1Entry.get())
     b = int(num2Entry.get())
-    s = a + b
-    result = f"The sum is {s}"
-    textArea = tk.Text(master = window, height = 2, width = 15)
+    op = myOption.get()
+    if op == "Add":
+        s = a + b
+        result = f"The result is: {s}"
+    elif op == "Subtract":
+        s = a - b
+        result = f"The result is {s}"
+    elif op == "Multiply":
+        s = a * b
+        result = f"The result is {s}"
+    elif op == "Divide":
+        s = a / b
+        result = f"The result is {s}"
+    else:
+        result = "Please select an operation"
+    textArea = tk.Text(master = window, height = 3, width = 20)
     textArea.grid(column = 1, row = 3)
     textArea.insert(tk.END, result)
 
-button = tk.Button(window, text = "Calculate Sum", command = addNumbers, bg = "lightgreen")
-button.grid(column = 1, row = 2)
+button = tk.Button(window, text = " Calculate", command=mathOperations, bg = "lightgreen")
+button.grid(column = 0, row = 3)
 
 window.mainloop()
